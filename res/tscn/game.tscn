@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://v2tlgkf8amg8"]
+
+[ext_resource type="Script" path="res://res/tscn/game.gd" id="1_aqjnq"]
+[ext_resource type="PackedScene" uid="uid://cliiypt31acla" path="res://res/tscn/player.tscn" id="1_plx8r"]
+[ext_resource type="PackedScene" uid="uid://c7ffhin4ksipb" path="res://res/tscn/AIplayer.tscn" id="2_8iq5j"]
+[ext_resource type="PackedScene" uid="uid://baxwltb8xjwgp" path="res://res/tscn/ball.tscn" id="2_mjmpu"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="4_4g42i"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/controller/ai_controller_2d.gd" id="5_0os0y"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5ufup"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_47f44"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1ftmu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l5hn5"]
+normal = Vector2(0, 1)
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_aqjnq")
+
+[node name="player1" parent="." instance=ExtResource("1_plx8r")]
+position = Vector2(256, 506)
+scale = Vector2(0.3, 0.3)
+
+[node name="AIController2D" type="Node2D" parent="player1"]
+script = ExtResource("5_0os0y")
+
+[node name="player2" parent="." instance=ExtResource("2_8iq5j")]
+position = Vector2(256, 6)
+scale = Vector2(0.3, 0.3)
+
+[node name="wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
+shape = SubResource("WorldBoundaryShape2D_5ufup")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2(512, 0)
+shape = SubResource("WorldBoundaryShape2D_47f44")
+
+[node name="ball" parent="." instance=ExtResource("2_mjmpu")]
+position = Vector2(256, 256)
+scale = Vector2(0.6, 0.6)
+
+[node name="p1deadline" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="p1deadline"]
+position = Vector2(0, 512)
+shape = SubResource("WorldBoundaryShape2D_1ftmu")
+
+[node name="p2deadline" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="p2deadline"]
+shape = SubResource("WorldBoundaryShape2D_l5hn5")
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource("4_4g42i")
+
+[connection signal="collide" from="ball" to="player1/AIController2D" method="_on_ball_collide"]
