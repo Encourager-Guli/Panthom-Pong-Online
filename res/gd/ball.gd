@@ -56,7 +56,6 @@ func _physics_process(delta: float) -> void:
 			speed*=1.05
 			var dis=collide_pos-collider.global_position.x
 			var softed_dis=dis/collider_length
-			print(softed_dis)
 			var n=message.get_normal()
 			var max_angle=PI/3
 			if collider_name=="player1":
@@ -84,19 +83,18 @@ func reset():
 	velocity=velocity.rotated(direction)
 	speedplus=0
 func set_speedrank_label(rank):
+	print(rank)
 	var color:Color
 	var lable_scale=1
 	match rank:
 		0:
-			speedrank.text="speed rank:"+str(rank)
 			color = Color("#00FFAA")  # 低速
 		1:
-			speedrank.text="speed rank:"+str(rank)
 			color = Color("#FFD700")  # 中速
 			lable_scale=1.2
 		2:
-			speedrank.text="speed rank:"+str(rank)
 			color = Color("#FF3300")  # 高速
 			lable_scale=1.5
+	speedrank.text="speed rank:"+str(rank)
 	speedrank.add_theme_color_override("font_color", color)
 	speedrank.scale=Vector2(lable_scale,lable_scale)

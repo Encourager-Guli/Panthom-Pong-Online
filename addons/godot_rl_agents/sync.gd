@@ -39,8 +39,6 @@ func _ready():
 		
 func _get_agents():
 	agents = get_tree().get_nodes_in_group("AGENT")
-	print(agents)
-	print("looooooooooooooooooooook at me")
 func _set_heuristic(heuristic):
 	for agent in agents:
 		agent.set_heuristic(heuristic)
@@ -204,7 +202,7 @@ func _physics_process(delta):
 				"reward": reward,
 				"done": done
 			}
-			print(reply)
+			#print(reply)
 			_send_dict_as_json_message(reply)
 			
 		var handled = handle_message()
