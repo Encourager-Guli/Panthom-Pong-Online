@@ -13,6 +13,8 @@ signal collide(collider)
 var origin_pos
 var origin_speed
 var speedplus=1.0
+@onready var speedrank: Label = $"../speedrank"
+
 
 func _ready() -> void:
 	
@@ -36,6 +38,7 @@ func _physics_process(delta: float) -> void:
 		rank+=action["speedup"]
 	if(Input.is_action_pressed("speedup2")):
 		rank+=1
+	set_speedrank_label(rank)
 	runningspeed=velocity*speed*speedup[rank]
 	speedplus=speed*speedup[rank]/origin_speed
 	reward=0
@@ -80,3 +83,20 @@ func reset():
 	velocity=Vector2(1,0)
 	velocity=velocity.rotated(direction)
 	speedplus=0
+func set_speedrank_label(rank):
+	var color:Color
+	var lable_scale=1
+	match rank:
+		0:
+			speedrank.text="speed rank:"+str(rank)
+			color = Color("#00FFAA")  # 低速
+		1:
+			speedrank.text="speed rank:"+str(rank)
+			color = Color("#FFD700")  # 中速
+			lable_scale=1.2
+		2:
+			speedrank.text="speed rank:"+str(rank)
+			color = Color("#FF3300")  # 高速
+			lable_scale=1.5
+	speedrank.add_theme_color_override("font_color", color)
+	speedrank.scale=Vector2(lable_scale,lable_scale)

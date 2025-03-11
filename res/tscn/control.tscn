@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://donki4ydg78o5"]
+
+[ext_resource type="Script" path="res://res/gd/title.gd" id="1_7fp4f"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7fp4f")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.762801, 0.0319026, 2.88785e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+text = "Phantom Pong Online"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.5
+offset_top = -50.5
+offset_right = 198.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="single" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "单人游戏"
+
+[node name="host" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "主持游戏"
+
+[node name="join" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "加入游戏"
+
+[connection signal="pressed" from="VBoxContainer/single" to="." method="_on_single_pressed"]

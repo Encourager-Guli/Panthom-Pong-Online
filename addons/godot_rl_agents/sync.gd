@@ -3,7 +3,6 @@ extends Node
 @export var action_repeat := 4
 @export var speed_up = 1
 var n_action_steps = 0
-
 const MAJOR_VERSION := "0"
 const MINOR_VERSION := "3" 
 const DEFAULT_PORT := "11008"
@@ -24,16 +23,24 @@ var just_reset = false
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
-	
-	await get_tree().root.ready
-	get_tree().set_pause(true) 
+	#await get_tree().root.ready
+	#get_tree().set_pause(true) 
+	#_initialize()
+	#
+	#await get_tree().create_timer(1.0).timeout
+	#get_tree().set_pause(false) 
+	 # 立即暂停，无需等待（根节点可能已准备就绪）
+	get_tree().set_pause(true)
+	# 确保初始化完成
 	_initialize()
-	await get_tree().create_timer(1.0).timeout
-	get_tree().set_pause(false) 
+	# 延迟1秒后恢复
+	#await get_tree().create_timer(1.0).timeout
+	get_tree().set_pause(false)
 		
 func _get_agents():
 	agents = get_tree().get_nodes_in_group("AGENT")
-
+	print(agents)
+	print("looooooooooooooooooooook at me")
 func _set_heuristic(heuristic):
 	for agent in agents:
 		agent.set_heuristic(heuristic)
@@ -141,7 +148,6 @@ func disconnect_from_server():
 
 func _initialize():
 	_get_agents()
-	
 	args = _get_args()
 	Engine.physics_ticks_per_second = _get_speedup() * 60 # Replace with function body.
 	Engine.time_scale = _get_speedup() * 1.0
@@ -262,6 +268,7 @@ func _call_method_on_agents(method):
 func _reset_agents_if_done():
 	for agent in agents:
 		agent.reset_if_done()
+	
 func _reset_all_agents():
 	for agent in agents:
 		agent.needs_reset = true

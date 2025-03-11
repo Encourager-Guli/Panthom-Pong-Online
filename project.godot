@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Pong"
-run/main_scene="res://res/tscn/game.tscn"
+run/main_scene="res://res/tscn/control.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=512
+window/size/viewport_width=720
 window/size/viewport_height=512
 window/stretch/mode="canvas_items"
 

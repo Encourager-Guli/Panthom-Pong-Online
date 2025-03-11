@@ -45,11 +45,11 @@ var n_steps := 0
 var needs_reset := false
 
 var _player: Node2D
-
+signal agent_ready
 
 func _ready():
 	add_to_group("AGENT")
-	
+	emit_signal("agent_ready")
 	if player1==null:
 		print("error player 1 not ready")
 
