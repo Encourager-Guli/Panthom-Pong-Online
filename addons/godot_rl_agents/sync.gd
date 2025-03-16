@@ -198,7 +198,6 @@ func _physics_process(delta):
 				"reward": reward,
 				"done": done
 			}
-			print(reply)
 			_send_dict_as_json_message(reply)
 			
 		var handled = handle_message()
@@ -208,6 +207,7 @@ func _physics_process(delta):
 func handle_message() -> bool:
 	# get json message: reset, step, close
 	var message = _get_dict_json_message()
+	print(message)
 	if message["type"] == "close":
 		print("received close message, closing game")
 		get_tree().quit()

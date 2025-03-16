@@ -8,7 +8,8 @@ var speedup=[1.0,1.5,2.0]
 var runningspeed
 var reward=0
 var done :bool=false
-var action=null
+var action1=null
+var action2=null
 signal collide(collider)
 var origin_pos
 var origin_speed
@@ -32,10 +33,10 @@ func _physics_process(delta: float) -> void:
 	#if(Input.is_action_pressed("speedup1")):
 		#
 		#rank+=1
-	if action:
-		rank+=action["speedup"]
-	if(Input.is_action_pressed("speedup2")):
-		rank+=1
+	if action1:
+		rank+=action1["speedup"]
+	if action2:
+		rank+=action2["speedup"]
 	runningspeed=velocity*speed*speedup[rank]
 	speedplus=speed*speedup[rank]/origin_speed
 	reward=0
@@ -65,10 +66,9 @@ func _physics_process(delta: float) -> void:
 			velocity=velocity.bounce(normal).normalized()
 	
 func get_ball_obs() -> Array:
-	if global_position==null:
-		print("not ready")
-		await (ready)
-	return [global_position.x/512,global_position.y/512,velocity.x,velocity.y,speedplus]
+	var viewport_size = get_viewport().size
+	#归一化输出，加速收敛
+	return [global_position.x/viewport_size.x,global_position.y/viewport_size.y,velocity.x,velocity.y,speedplus]
 
 func get_reward() -> float:
 	return reward

@@ -16,8 +16,10 @@ func _physics_process(delta: float) -> void:
 	velocity.y=0
 	move_and_collide(velocity*delta)
 	
-func get_player1_obs() ->Array:
-	return[global_position.x/512,global_position.y/512,direction]
+func get_player_obs() ->Array:
+	var viewport_size = get_viewport().size
+	#归一化输出，加速收敛
+	return[global_position.x/viewport_size.x,global_position.y/viewport_size.y,direction]
 func reset():
 	global_position=origin_pos
 func get_collide_length():

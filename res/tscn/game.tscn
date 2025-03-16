@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://v2tlgkf8amg8"]
 
-[ext_resource type="Script" path="res://res/tscn/game.gd" id="1_aqjnq"]
+[ext_resource type="Script" path="res://res/gd/game.gd" id="1_aqjnq"]
 [ext_resource type="PackedScene" uid="uid://cliiypt31acla" path="res://res/tscn/player.tscn" id="1_plx8r"]
 [ext_resource type="PackedScene" uid="uid://c7ffhin4ksipb" path="res://res/tscn/AIplayer.tscn" id="2_8iq5j"]
 [ext_resource type="PackedScene" uid="uid://baxwltb8xjwgp" path="res://res/tscn/ball.tscn" id="2_mjmpu"]

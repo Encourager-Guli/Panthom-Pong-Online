@@ -1,9 +1,9 @@
 extends Node2D
 class_name AIController2D
-@onready var player1: CharacterBody2D = $".."
-@onready var player2: CharacterBody2D = $"../../player2"
-@onready var ball: CharacterBody2D = $"../../ball"
-@onready var game: Node2D = $"../.."
+@onready var player1: CharacterBody2D = get_node("/root/game/player1")
+@onready var player2: CharacterBody2D = get_node("/root/game/player2")
+@onready var ball: CharacterBody2D =get_node("/root/game/ball")
+@onready var game: Node2D = get_node("/root/game")
 
 
 
@@ -50,9 +50,6 @@ var _player: Node2D
 func _ready():
 	add_to_group("AGENT")
 	
-	if player1==null:
-		print("error player 1 not ready")
-
 func init(player: Node2D):
 	_player = player
 
@@ -60,11 +57,13 @@ func init(player: Node2D):
 #region Methods that need implementing using the "extend script" option in Godot
 func get_obs() -> Dictionary:
 	var obs=[]
-	obs.append_array(player1.get_player1_obs())
-	obs.append_array(player2.get_player2_obs())
+	obs.append_array(player1.get_player_obs())
+	obs.append_array(player2.get_player_obs())
 	obs.append_array(ball.get_ball_obs())
+	#obs的结构是一个十维向量，包括p1的位置，速度，p2的位置，速度，球的位置，速度，以及速度档位，数据已经归一化
 	
-	return {"obs":obs}
+	#得到的原始数据需要进行处理，切换到相应的智能体的视角空间
+	return {"obs":process_obs(obs)}
 
 
 func get_reward() -> float:
@@ -92,7 +91,7 @@ func get_action_space() -> Dictionary:
 
 func set_action(action) -> void:
 	player1.action=action	
-	ball.action=action
+	ball.action1=action
 
 
 #endregion
@@ -159,8 +158,9 @@ func zero_reward():
 
 
 
-
-
+func process_obs(obs):
+	#p1的obs没必要重写，因为都是以p1为基础的，其它智能体的观测值需要进行重写
+	return obs
 func _on_ball_collide(collider: Variant) -> void:
 	if collider=="player1":
 		reward=0.1

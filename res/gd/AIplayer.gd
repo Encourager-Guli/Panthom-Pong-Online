@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	velocity.y=0
 	move_and_collide(velocity*delta)
 	
-func get_player2_obs() -> Array:
+func get_player_obs() -> Array:
 	return [global_position.x/512,global_position.y/512,direction.x]
 func reset():
 	global_position=origin_pos
