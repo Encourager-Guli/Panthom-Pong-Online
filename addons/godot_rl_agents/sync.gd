@@ -19,6 +19,7 @@ var args = null
 @onready var start_time = Time.get_ticks_msec()
 var initialized = false
 var just_reset = false
+@onready var player_2: CharacterBody2D = $"../player2"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -242,8 +243,12 @@ func handle_message() -> bool:
 		return handle_message()
 	
 	if message["type"] == "action":
-		var action = message["action"]
-		_set_agent_actions(action) 
+		var action1 = message["action"]
+		print(action1)
+		_set_agent_actions(action1) 
+		var action2=message["action2"]
+		print(action2)
+		_set_opponent_action(action2)
 		need_to_send_obs = true
 		get_tree().set_pause(false) 
 		return true
@@ -293,4 +298,6 @@ func _get_done_from_agents():
 func _set_agent_actions(actions):
 	for i in range(len(actions)):
 		agents[i].set_action(actions[i])
-	
+
+func _set_opponent_action(action):
+	player_2.action=action[0]

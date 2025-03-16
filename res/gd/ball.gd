@@ -17,7 +17,7 @@ var speedplus=1.0
 
 func _ready() -> void:
 	
-	direction=randf()*PI/2+PI/4*5
+	direction=randf()*PI/2+PI/4
 	velocity=Vector2(1,0)
 	velocity=velocity.rotated(direction)
 	var player1_path = "../player1"
@@ -76,7 +76,7 @@ func get_reward() -> float:
 func reset():
 	global_position=origin_pos
 	speed=origin_speed
-	direction=randf()*PI/2+PI/4*5
+	direction=randf()*PI/2+PI/4
 	velocity=Vector2(1,0)
 	velocity=velocity.rotated(direction)
 	speedplus=0
