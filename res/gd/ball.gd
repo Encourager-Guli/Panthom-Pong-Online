@@ -18,7 +18,7 @@ var speedplus=1.0
 
 func _ready() -> void:
 	
-	direction=randf()*PI/2+PI/4*5
+	direction=randf()*PI/2+PI/4
 	velocity=Vector2(1,0)
 	velocity=velocity.rotated(direction)
 	var player1_path = "../player1"
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		#rank+=1
 	if action:
 		rank+=action["speedup"]
-	if(Input.is_action_pressed("speedup2")):
+	if(Input.is_action_pressed("speedup1")):
 		rank+=1
 	set_speedrank_label(rank)
 	runningspeed=velocity*speed*speedup[rank]
@@ -78,7 +78,7 @@ func get_reward() -> float:
 func reset():
 	global_position=origin_pos
 	speed=origin_speed
-	direction=randf()*PI/2+PI/4*5
+	direction=randf()*PI/2+PI/4
 	velocity=Vector2(1,0)
 	velocity=velocity.rotated(direction)
 	speedplus=0

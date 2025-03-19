@@ -3,15 +3,12 @@ extends CharacterBody2D
 @onready var player_1: CharacterBody2D = $"."
 
 var speed=220
-var action=null
 var origin_pos
 var direction
 func _ready() -> void:
 	origin_pos=global_position
 func _physics_process(delta: float) -> void:
-	direction=0
-	if action:
-		direction =action["right"]-action["left"]
+	direction =Input.get_axis("left","right")
 	velocity.x=direction*speed
 	velocity.y=0
 	move_and_collide(velocity*delta)

@@ -18,8 +18,8 @@ var args = null
 @onready var start_time = Time.get_ticks_msec()
 var initialized = false
 var just_reset = false
-
-
+var ip=GlobalConfig.server_ip
+var port=GlobalConfig.server_port
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
@@ -98,8 +98,7 @@ func connect_to_server():
 	stream = StreamPeerTCP.new()
 	
 	# "localhost" was not working on windows VM, had to use the IP
-	var ip = "127.0.0.1"
-	var port = _get_port()
+	#var port = _get_port()
 	var connect = stream.connect_to_host(ip, port)
 	stream.set_no_delay(true) # TODO check if this improves performance or not
 	stream.poll()

@@ -91,7 +91,7 @@ func get_action_space() -> Dictionary:
 
 
 func set_action(action) -> void:
-	player1.action=action	
+	player2.action=action	
 	ball.action=action
 
 
