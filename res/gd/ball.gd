@@ -34,6 +34,7 @@ func _ready() -> void:
 	collider_length=player1.get_collide_length()
 func _physics_process(delta: float) -> void:
 	var rank=0
+	print(global_position)
 	#if(Input.is_action_pressed("speedup1")):
 		#
 		#rank+=1
@@ -72,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func get_ball_obs() -> Array:
 	var viewport_size = get_viewport().size
 	#归一化输出，加速收敛
-	return [global_position.x/viewport_size.x,global_position.y/viewport_size.y,velocity.x,velocity.y,speedplus]
+	return [global_position.x/Global.Width,global_position.y/Global.Height,velocity.x,velocity.y,speedplus]
 
 func get_reward() -> float:
 	return reward

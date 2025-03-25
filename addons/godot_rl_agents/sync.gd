@@ -208,7 +208,6 @@ func _physics_process(delta):
 func handle_message() -> bool:
 	# get json message: reset, step, close
 	var message = _get_dict_json_message()
-	print(message)
 	if message["type"] == "close":
 		print("received close message, closing game")
 		get_tree().quit()
@@ -244,10 +243,10 @@ func handle_message() -> bool:
 	
 	if message["type"] == "action":
 		var action1 = message["action"]
-		print(action1)
+		#print(action1)
 		_set_agent_actions(action1) 
 		var action2=message["action2"]
-		print(action2)
+		#print(action2)
 		_set_opponent_action(action2)
 		need_to_send_obs = true
 		get_tree().set_pause(false) 
