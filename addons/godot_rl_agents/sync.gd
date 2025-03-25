@@ -1,13 +1,13 @@
 extends Node
 # --fixed-fps 2000 --disable-render-loop
-@export var action_repeat := 4
+@export var action_repeat := 1
 @export var speed_up = 1
 var n_action_steps = 0
 const MAJOR_VERSION := "0"
 const MINOR_VERSION := "3" 
 const DEFAULT_PORT := "11008"
 const DEFAULT_SEED := "1"
-const DEFAULT_ACTION_REPEAT := "4"
+const DEFAULT_ACTION_REPEAT := "1"
 var stream : StreamPeerTCP = null
 var connected = false
 var message_center
